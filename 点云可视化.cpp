@@ -1,5 +1,5 @@
 // 2020.02
-//µãÔÆ¿ÉÊÓ»¯
+//ç‚¹äº‘å¯è§†åŒ–
 
 #include <pcl/kdtree/kdtree_flann.h>
 #include <pcl/filters/extract_indices.h>
@@ -21,8 +21,8 @@ int user_data;
 void
 viewerOneOff(pcl::visualization::PCLVisualizer& viewer)
 {
-	viewer.setBackgroundColor(255, 255, 255);     //ÉèÖÃ±³¾°ÑÕÉ«
-	//ÓÃÓÚ¸Ä±äÏÔÊ¾µãÔÆµÄ³ß´ç£¬¿ÉÒÔÀûÓÃ¸Ã·½·¨¿ØÖÆµãÔÆÔÚÊÓ´°ÖĞµÄÏÔÊ¾·½·¨,1ÉèÖÃÏÔÊ¾µãÔÆ´óĞ¡
+	viewer.setBackgroundColor(255, 255, 255);     //è®¾ç½®èƒŒæ™¯é¢œè‰²
+	//ç”¨äºæ”¹å˜æ˜¾ç¤ºç‚¹äº‘çš„å°ºå¯¸ï¼Œå¯ä»¥åˆ©ç”¨è¯¥æ–¹æ³•æ§åˆ¶ç‚¹äº‘åœ¨è§†çª—ä¸­çš„æ˜¾ç¤ºæ–¹æ³•,1è®¾ç½®æ˜¾ç¤ºç‚¹äº‘å¤§å°
 	viewer.setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 4);
 	
 	
@@ -64,11 +64,11 @@ Preprocess(pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud)
 
 void getAllFiles(string path, vector<string>& files)
 {
-	//ÎÄ¼ş¾ä±ú  
+	//æ–‡ä»¶å¥æŸ„  
 	__int64 hFile = 0;
-	//ÎÄ¼şĞÅÏ¢  
-	struct __finddata64_t  fileinfo;  //ºÜÉÙÓÃµÄÎÄ¼şĞÅÏ¢¶ÁÈ¡½á¹¹
-	string p;  //stringÀàºÜÓĞÒâË¼µÄÒ»¸ö¸³Öµº¯Êı:assign()£¬ÓĞºÜ¶àÖØÔØ°æ±¾
+	//æ–‡ä»¶ä¿¡æ¯  
+	struct __finddata64_t  fileinfo;  //å¾ˆå°‘ç”¨çš„æ–‡ä»¶ä¿¡æ¯è¯»å–ç»“æ„
+	string p;  //stringç±»å¾ˆæœ‰æ„æ€çš„ä¸€ä¸ªèµ‹å€¼å‡½æ•°:assign()ï¼Œæœ‰å¾ˆå¤šé‡è½½ç‰ˆæœ¬
 	if ((hFile = _findfirst64(p.assign(path).append("/*.pcd").c_str(), &fileinfo)) == -1)
 	{
 		cout << "No file is found\n" << endl;
@@ -78,15 +78,15 @@ void getAllFiles(string path, vector<string>& files)
 		do
 		{
 			files.push_back(p.assign(path).append("/").append(fileinfo.name));
-		} while (_findnext64(hFile, &fileinfo) == 0);  //Ñ°ÕÒÏÂÒ»¸ö£¬³É¹¦·µ»Ø0£¬·ñÔò-1
+		} while (_findnext64(hFile, &fileinfo) == 0);  //å¯»æ‰¾ä¸‹ä¸€ä¸ªï¼ŒæˆåŠŸè¿”å›0ï¼Œå¦åˆ™-1
 		_findclose(hFile);
 	}
 }
 
 int main()
 {
-	//ÎÄ¼şÃû
-	string path = "F:\\CYL\\2020\\S\\ASISÓëMNFE½á¹û\\ASIS199_4096\\pcd\\";
+	//æ–‡ä»¶å
+	string path = "F:\\CYL\\2020\\S\\ASISä¸MNFEç»“æœ\\ASIS199_4096\\pcd\\";
 	vector<string> files;
 
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGB>());
@@ -94,9 +94,9 @@ int main()
 	for (auto file : files)
 	{
 
-		if (pcl::io::loadPLYFile<pcl::PointXYZRGB>(file, *cloud) == -1) //* ¶ÁÈëÎÄ¼ş£¬Èç¹ûÎÄ¼ş²»´æÔÚ£¬·µ»Ø-1	
+		if (pcl::io::loadPLYFile<pcl::PointXYZRGB>(file, *cloud) == -1) //* è¯»å…¥æ–‡ä»¶ï¼Œå¦‚æœæ–‡ä»¶ä¸å­˜åœ¨ï¼Œè¿”å›-1	
 		{
-			PCL_ERROR("Couldn't read file  \n"); //ÎÄ¼ş²»´æÔÚÊ±£¬·µ»Ø´íÎó£¬ÖÕÖ¹³ÌĞò¡£	
+			PCL_ERROR("Couldn't read file  \n"); //æ–‡ä»¶ä¸å­˜åœ¨æ—¶ï¼Œè¿”å›é”™è¯¯ï¼Œç»ˆæ­¢ç¨‹åºã€‚	
 			system("pause");
 			return (-1);
 		}
@@ -106,7 +106,7 @@ int main()
 			<< std::endl;
 
 
-		// Show Point Cloud on Cloud ViewerÔÚµãÔÆ¿òÖĞÏÔÊ¾µãÔÆÍ¼Ïñ
+		// Show Point Cloud on Cloud Vieweråœ¨ç‚¹äº‘æ¡†ä¸­æ˜¾ç¤ºç‚¹äº‘å›¾åƒ
 
 		pcl::visualization::CloudViewer viewer("Point Cloud Viewer");
 		viewer.runOnVisualizationThreadOnce(viewerOneOff);
